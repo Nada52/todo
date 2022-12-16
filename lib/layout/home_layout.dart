@@ -1,13 +1,6 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:sqflite/sqflite.dart';
-import 'package:to_do/modules/archived_tasks/archived_tasks_screen.dart';
-import 'package:to_do/modules/done_tasks/done_tasks_screen.dart';
-import 'package:to_do/modules/new_tasks/new_tasks_screen.dart';
-import 'package:to_do/shared/components/constants.dart';
 import 'package:to_do/shared/cubit/cubit.dart';
 import 'package:to_do/shared/cubit/states.dart';
 
@@ -32,15 +25,12 @@ class HomeLayout extends StatelessWidget {
         },
         builder: (BuildContext context, AppStates states) {
           AppCubit cubit = AppCubit.get(context);
-          log('nada');
           return Scaffold(
             key: scaffoldKey,
             appBar: AppBar(
               title: Text(cubit.titles[cubit.currentIndex]),
             ),
-            body: cubit.tasks.isEmpty
-                ? const Center(child: CircularProgressIndicator())
-                : cubit.screens[cubit.currentIndex],
+            body: cubit.screens[cubit.currentIndex],
             floatingActionButton: FloatingActionButton(
               onPressed: () {
                 if (cubit.isBottomSheetShown) {
